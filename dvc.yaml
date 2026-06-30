@@ -27,13 +27,13 @@ stages:
     params:
     - feature_engineering.max_features
     outs:
-    - data/features/test_bow.csv
-    - data/features/train_bow.csv
+    - data/features/test_tfid.csv
+    - data/features/train_tfid.csv
 
   model_building:
     cmd: python src/models/model_building.py
     deps:
-    - data/features/train_bow.csv
+    - data/features/train_tfid.csv
     - src/models/model_building.py
     params:
     - model_building.n_estimators
@@ -45,7 +45,7 @@ stages:
   model_evaluation:
     cmd: python src/models/model_evaluation.py
     deps:
-    - data/features/test_bow.csv
+    - data/features/test_tfid.csv
     - models/label_encoder.pkl
     - models/model.pkl
     - src/models/model_evaluation.py
